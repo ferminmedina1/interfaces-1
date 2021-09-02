@@ -23,13 +23,13 @@
             <canvas id='canvas' width="800" height="500"></canvas>
             <ul class="buttons">
                 <li class="item" id="pencil"><i class='fas fa-pencil-alt'></i></li>
-                <li class="item"><i class='fas fa-eraser'></i></li>
+                <li class="item" id="eraser"><i class='fas fa-eraser'></i></li>
                 <li class="item"><i class="fas fa-file-image"></i></li>
                 <li class="item" id='brightness'><i class="far fa-sun"></i></li>
                 <div class="off-slider" id="slider">
                     <input type="range" min="1" max="100" value="50" id="myRange">
                 </div>                  
-                <li class="item"><i class="far fa-file"></i></li>
+                <li class="item" id="reset"><i class="far fa-file"></i></li>
                 <li class="item"><select name="filter-select" id="filter-select">
                     <option></option>
                     <option value="binarización">Binarización</option>
@@ -40,8 +40,8 @@
                 </select></li>
             </ul>
             <section class="color-picker">
-                <input type="color" id="head" name="head"
-                value="#e66465">
+                <input type="color" id="color-picker" name="head"
+                value="#000000">
             </section>
         </section>
     </article>
