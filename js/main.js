@@ -14,7 +14,7 @@ function loadPage () {
     let rect = canvas.getBoundingClientRect(); //obtiene la posicion del canvas
     let x = 0, y =0;
     let dibujando = false;
-    let color;
+    let color = document.getElementById("color-picker").value;
     let eraser = false;
     
     document.getElementById("color-picker").addEventListener("change", function (e){
@@ -63,6 +63,7 @@ function loadPage () {
     
     document.getElementById("pencil").addEventListener("click", function(e){
         eraser = false;
+        ctx.strokeStyle = color;
     });
 
     document.getElementById("eraser").addEventListener("click", function(e){
