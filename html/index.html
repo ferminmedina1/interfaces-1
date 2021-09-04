@@ -3,10 +3,8 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Interfaces</title>
+    <title>Paint</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/paint-container.css">
     <script src="https://kit.fontawesome.com/67e13957ac.js" crossorigin="anonymous"></script>
@@ -14,34 +12,55 @@
 </head>
 <body>
     <header>
+
         <img src="../img/exa.jpg" alt="exa-img" id='exa-img'>
         <h1 class="title">Ejercicio Entregable – Práctico Nº1</h1>
+
     </header>
 
     <article class="index-container">
+
         <section class="paint-container">
+
             <canvas id='canvas' width="800" height="500"></canvas>
+
             <ul class="buttons">
+                
                 <li class="item" id="pencil"><i class='fas fa-pencil-alt'></i></li>
+                <div class="off-slider" id="sliderPencil">
+                    <input type="range" min="1" max="100" value="50" id="pencilThickness">
+                </div>
                 <li class="item" id="eraser"><i class='fas fa-eraser'></i></li>
-                <li class="item"><i class="fas fa-file-image"></i></li>
+                
+                <div class="off-slider" id="sliderEraser">
+                    <input type="range" min="1" max="100" value="50" id="eraserThickness">
+                </div>
+                <li class="item"><i class="fas fa-file-image">
+                    <input type="file"  accept="image/*" name="image" id="myFile" ></li></i>
                 <li class="item" id='brightness'><i class="far fa-sun"></i></li>
+                
                 <div class="off-slider" id="slider">
                     <input type="range" min="1" max="100" value="50" id="myRange">
                 </div>                  
+                
                 <li class="item" id="reset"><i class="far fa-file"></i></li>
-                <li class="item"><select name="filter-select" id="filter-select">
-                    <option></option>
-                    <option value="binarización">Binarización</option>
-                    <option value="sepia">Sepia</option>
-                    <option value="saturación">Saturación</option>
-                    <option value="blur">Blur</option>
-                    <option value="negativo">Negativo</option>
-                </select></li>
+                
+                <li class="item">
+                    <select name="filter-select" id="filter-select">
+
+                        <option></option>
+                        <option value="binarizacion">Binarización</option>
+                        <option value="sepia">Sepia</option>
+                        <option value="saturacion">Saturación</option>
+                        <option value="blur">Blur</option>
+                        <option value="negativo">Negativo</option>
+                    </select>
+                </li>
+        
+
             </ul>
             <section class="color-picker">
-                <input type="color" id="color-picker" name="head"
-                value="#000000">
+                <input type="color" id="color-picker" name="head" value="#000000">
             </section>
         </section>
     </article>
