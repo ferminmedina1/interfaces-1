@@ -24,41 +24,51 @@ function loadPage () {
 //evento para habilitar el lapiz
 
     document.getElementById("pencil").addEventListener("click", function(e){    //se clickea sobre el lapiz
-            
-        document.querySelector("#sliderPencil").classList.toggle("on-slider");  //depega el slider
+        accionarLapiz();
+    });
 
+    document.getElementById("pencilThickness").addEventListener("change", function(e){
+        accionarLapiz();
+    });
+
+    function accionarLapiz(){
         ctx.strokeStyle = color;    //se obtiene el color del lapiz
         let trazoLapiz = document.getElementById("pencilThickness").value;  //se obtine el valor desde el slider (falta arreglar)
         ctx.lineWidth = trazoLapiz;    
-        iniciarLapiz()
-    });
+        iniciarLapiz();
+    }
 
 
 //evento del boton borrrar
 
     document.getElementById("eraser").addEventListener("click", function(e){
-
-        document.querySelector("#sliderEraser").classList.toggle("on-slider");  //depega el slider
-
-        ctx.strokeStyle = '#ffffff';
-        let trazoBorrado = document.getElementById("eraserThickness").value;  //se obtine el valor desde el slider (falta arreglar)
-        ctx.lineWidth = trazoBorrado;
-        iniciarLapiz()
-        dibujar(e);
+        accionarBorrador();
     });
+
+    document.getElementById("eraserThickness").addEventListener("change", function(e){
+        accionarBorrador();
+    });
+
+    function accionarBorrador(){
+        ctx.strokeStyle = '#ffffff';
+        let trazoBorrado = document.getElementById("eraserThickness").value;
+        ctx.lineWidth = trazoBorrado;
+        iniciarLapiz();
+    }
 
 
 //evento del slider de brillo
 
     document.querySelector("#brightness").addEventListener("click", function(e) {
-        document.querySelector("#slider").classList.toggle("on-slider");
-        menu.classList.toggle("desplegarNav");
+       //hacer
     });
 
 
 //evento para limpiar el canvas
 
     document.getElementById("reset").addEventListener("click", function(e){
+        canvas.width = 800;
+        canvas.height = 500;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     });
 
@@ -100,15 +110,26 @@ function loadPage () {
 
 //imagen precargada, arreglar para cuando se quiere cargar desde la pagina
 
-function loadImage (image){
-    ctx.drawImage(image, 0, 0);
-}
 
-let image1 = new Image();
-image1.src = "../img/imagenDePrueba.jpg"
-image1.onload = function(){
-    loadImage(this)
-}
+
+    let imgInput = document.getElementById('myFile');
+    imgInput.addEventListener('change', function(e) {
+      if(e.target.files) {
+        let imageFile = e.target.files[0]; //aca obtenemos el archivo
+        var reader = new FileReader();
+        reader.readAsDataURL(imageFile);
+        reader.onloadend = function (e) {
+          var myImage = new Image(); // Crea la imageb
+          myImage.src = e.target.result; 
+          myImage.onload = function() {
+              canvas.width = myImage.width; // Assigns image's width to canvas
+              canvas.height = myImage.height; // Assigns image's height to canvas
+              ctx.drawImage(myImage, 0, 0);
+          }
+        }
+      }
+    });
+
 
 
 //evento para seleccionar el filtro
