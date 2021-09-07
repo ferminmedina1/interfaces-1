@@ -141,7 +141,6 @@ function loadPage () {
 
         
         if (filtro == "negativo"){   //si el filtro seleccionado es..
-
             filterNegativo();   
         }
 
@@ -160,15 +159,14 @@ function loadPage () {
         if (filtro == "binarizacion"){
             //hacer
         }
-
+        document.getElementById("filter-select").selectedIndex = 0;
     })
 
 
  //funcion para el filtro negativo
 
     function filterNegativo(){     
-
-        let imageData = ctx.createImageData(canvas.width, canvas.height);
+        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         console.log(imageData)
 
         for (let x = 0; x < canvas.width; x++) {
@@ -182,7 +180,7 @@ function loadPage () {
                 setPixel(imageData, x, y, r, g, b, a);
             }
         }
-        ctx.putImageData(imageData, 0, 0)
+        ctx.putImageData(imageData, 0, 0);
         
     }
 
