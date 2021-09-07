@@ -173,8 +173,11 @@ function loadPage () {
             for (let y = 0; y < canvas.height; y++) {
                 
                 let r = getRed(imageData, x, y);
+                r = 255 - r;
                 let g = getGreen(imageData, x, y);
+                g = 255 - g;
                 let b = getBlue(imageData, x, y);
+                b = 255 - b;
                 let a = 255;
         
                 setPixel(imageData, x, y, r, g, b, a);
