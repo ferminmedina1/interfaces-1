@@ -67,9 +67,19 @@ function loadPage () {
 //evento para limpiar el canvas
 
     document.getElementById("reset").addEventListener("click", function(e){
-        canvas.width = 800;
-        canvas.height = 500;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let response = confirm("Esta seguro que quiere eliminar su obra de arte?");
+        if(response){
+            canvas.width = 800;
+            canvas.height = 500;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    });
+
+    document.getElementById("download").addEventListener("click", function(e){
+        let link = document.createElement('a');
+        link.download = 'canvas.png';
+        link.href = document.getElementById('canvas').toDataURL()
+        link.click();
     });
 
 
