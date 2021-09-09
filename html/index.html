@@ -7,6 +7,10 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/paint-container.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">     
     <script src="https://kit.fontawesome.com/67e13957ac.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="../js/main.js"></script>
@@ -24,26 +28,55 @@
         <section class="paint-container">
 
             <canvas id='canvas' width="800" height="500"></canvas>
+
             <ul class="buttons">
                 
-                <li class="item" id="pencil"><i class='fas fa-pencil-alt'></i></li>
-                <div class="on-slider" id="sliderPencil">
-                    <input type="range" min="1" max="100" value="50" id="pencilThickness">
-                </div>
-                <li class="item" id="eraser"><i class='fas fa-eraser'></i></li>
+                <li class="item" id="pencil">
+                        <i class='fas fa-pencil-alt'></i>
+                    <div class="on-slider" id="sliderPencil">
+                        <input type="range" min="1" max="100" value="50" id="pencilThickness">
+                    </div>
+                </li>
+                <li class="item" id="eraser">
+                    <i class='fas fa-eraser'></i>
+                    <div class="on-slider" id="sliderEraser">
+                        <input type="range" min="1" max="100" value="50" id="eraserThickness">
+                    </div>
+                </li>
                 
-                <div class="on-slider" id="sliderEraser">
-                    <input type="range" min="1" max="100" value="50" id="eraserThickness">
-                </div>
                 <li class="item" id="select-image"><i class="fas fa-file-image"></i>
                     <input type="file" name="image" id="myFile" ></li>
-                <!-- <li class="item" id='brightness'><i class="far fa-sun"></i></li>
+                
+                    <!-- <li class="item" id='brightness'>
+                    <i class="far fa-sun"></i>
+                    <div class="on-slider" id="slider">
+                        <input type="range" min="1" max="100" value="50" id="myRange">
+                    </div>      
+                </li>             -->
                 
                 <div class="file-container">
                 <li class="item" id="reset"><i class="far fa-file"></i></li>
                 <li class="item" id="download"><i class="fa fa-download"></i></li>
                 </div>
-                <li class="item">
+                
+            </ul>
+                <div class="colorYFiltros">
+                    <section class="color-picker">
+                        <input type="color" id="color-picker" name="head" value="#000000">
+                    </section>
+                    <div class="filtros">
+                        <h4>FILTROS</h4>
+        
+                            <div class="buttonsFilters">
+                                <button value="brillo">Brillo</button>
+                                <button value="binarizacion">Binarización</button>
+                                <button value="sepia">Sepia</button>
+                                <button value="saturacion">Saturación</button>
+                                <button value="blur">Blur</button>
+                                <button value="negativo">Negativo</button>
+                            </div>
+                    </div>
+                <!-- <li class="item">
                     <select name="filter-select" id="filter-select">
                         <option hidden></option>
                         <option value="binarizacion">Binarización</option>
@@ -53,29 +86,13 @@
                         <option value="negativo">Negativo</option>
                     </select>
                 </li>
-        
+         -->
 
-            </ul>
-
-            <div class="colorYFiltros">
-            <section class="color-picker">
+            
+            <!-- <section class="color-picker">
                 <input type="color" id="color-picker" name="head" value="#000000">
-            </section>
-            <div class="filtros">
-                <h4>FILTROS</h4>
-
-                    <div class="buttonsFilters">
-                        <button value="brillo">Brillo</button>
-                        <button value="binarizacion">Binarización</button>
-                        <button value="sepia">Sepia</button>
-                        <button value="saturacion">Saturación</button>
-                        <button value="blur">Blur</button>
-                        <button value="negativo">Negativo</button>
-                    </div>
-            </div>
-        </div>
+            </section> -->
         </section>
-
     </article>
 
 </body>

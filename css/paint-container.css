@@ -18,20 +18,23 @@
 }
 
 i{
-    font-size: 30px;
+    font-size: 20px;
 }
 
 li{
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
+
 .item{
-    margin-top: 40px;
+    margin-top: 10%;
     display: flex;
     align-items: center;
-    background-color: white;
+    color: white;
+    background-color: rgb(45 45 46);
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 20px;
@@ -41,7 +44,6 @@ li{
 .item:hover{
     transition: all ease 600ms;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-    cursor: pointer;
 }
 
 #pencil{
@@ -53,10 +55,14 @@ li{
     width: 90%;
     padding: 5px;
     margin-top: 5px;
-    background-color: white;
+    background-color: rgb(17, 17, 17);
     border-radius: 20px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     transition: all ease 1000ms;
+}
+
+li, #color-picker, #pencilThickness, #eraserThickness:hover{
+    cursor: pointer;
 }
 
 select{
@@ -66,7 +72,6 @@ select{
     color: white;
     font-size: 15px;
     font-family: 'Roboto', sans-serif;
-
 }
 
 option{
@@ -77,12 +82,16 @@ option{
     background-color: #3d393a;
     position: relative;
     overflow: hidden;
-    width: 117px;
-    height: 117px;
+    width: 105px;
+    height: 105px;
     border: solid 5px #ddd;
     border-radius: 100px;
     margin: 20px;
     align-self: flex-start;
+}
+
+#color-picker:hover{
+    cursor: pointer;
 }
 
 input[type="color"] {
@@ -110,4 +119,8 @@ input[type="range"] {
 
 #myFile{
     width: 80%;
+}
+
+.fa-file-image{
+    margin-bottom: 10px;
 }
