@@ -10,7 +10,7 @@ function loadPage () {
     let ctx = canvas.getContext('2d');   
     let color = document.getElementById("color-picker").value;  //traer el valor desde la paleta de colores
     let dibujando = false;
-
+    habilitarFiltros();
 
 //evento para obtener el color
 
@@ -29,6 +29,10 @@ function loadPage () {
 
     document.getElementById("pencilThickness").addEventListener("change", function(e){
         accionarLapiz();
+    });
+
+    canvas.addEventListener("mouseleave", function(e){ //si se va del canvas deja de dibujar!
+        dibujando = false;
     });
 
     function accionarLapiz(){
@@ -140,7 +144,6 @@ function loadPage () {
               canvas.width = myImage.width; // Assigns image's width to canvas
               canvas.height = myImage.height; // Assigns image's height to canvas
               ctx.drawImage(myImage, 0, 0);
-              habilitarFiltros()
               accionarLapiz();
           }
         }
@@ -158,17 +161,18 @@ function habilitarFiltros(){
     for(let i=0; i < botones.length; i++) {   //se recorre el arreglo de botones
 
         botones[i].addEventListener("click", function(){    //si se hace click se crea el evento
-        
+            let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
             if (botones[i].value == "negativo"){   //si el filtro seleccionado es..
-                filterNegativo();   
+                filterNegativo(imageData);   
             }
 
             if (botones[i].value == "saturacion"){
-                filterSaturacion();
+                filterSaturacion(imageData);
             }
 
             if (botones[i].value == "binarizacion"){
-                filterBinarizacion()
+                filterBinarizacion(imageData)
             }
 
             if (botones[i].value == "sepia"){
@@ -176,7 +180,7 @@ function habilitarFiltros(){
             } 
 
             if (botones[i].value == "blur"){
-                //hacer
+                filterBlur(imageData);
             }
         
         })
@@ -185,12 +189,18 @@ function habilitarFiltros(){
 }
 
 
+function filterBlur(imagen) {
+    let matrizFiltro = [
+        [1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1]
+    ];
+    return apFiltro(imagen);
+}
+
 //funcion para el filtro negativo
 
-function filterNegativo(){     
-    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    console.log(imageData)
-
+function filterNegativo(imageData){     
     for (let x = 0; x < canvas.width; x++) {
         for (let y = 0; y < canvas.height; y++) {
             
@@ -212,9 +222,7 @@ function filterNegativo(){
 
 //funcion de para filtro de saturacion
 
-function filterSaturacion(){
-    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
+function filterSaturacion(imageData){
     for (let x = 0; x < canvas.width; x++) {
         for (let y = 0; y < canvas.height; y++) {
             
@@ -223,7 +231,7 @@ function filterSaturacion(){
             let b = getBlue(imageData, x, y);
             let a = 255;
             let hsv = rgbToHsv (r, g, b);
-            hsv.s += 3;
+            hsv.s += 5;
             let jsonRGB = HSVtoRGB(hsv)
             r = jsonRGB.r
             g = jsonRGB.g
@@ -265,10 +273,7 @@ function filterBrillo(brillo){
 
 //funcion para filtro de binarizacion
 
-function filterBinarizacion(){
-
-    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
+function filterBinarizacion(imageData){
     for (let x = 0; x < canvas.width; x++) {
         for (let y = 0; y < canvas.height; y++) {
             
@@ -363,6 +368,22 @@ var v = Math.round(hsv.v * 255 / 100);
     }
 
 return { r: Math.round(rgb.r), g: Math.round(rgb.g), b: Math.round(rgb.b) };
+}
+
+function apFiltro(imageData) {
+
+    for (let y = 0; y < canvas.height; y++) {
+        for (let x = 0; x < canvas.width; x++) {
+            let r=0, g=0, b=0;
+            if  ((x + 1 < canvas.width) && (x - 1 >= 0) && (y + 1 < canvas.height) && (y - 1 >= 0)) {           
+                r = getRed(imageData,x-1,y+1) + getRed(imageData,x - 1, y + 1) + getRed(imageData,x, y + 1) +  getRed(imageData,x + 1, y + 1) + getRed(imageData,x - 1, y)+getRed(imageData,x, y)+ getRed(imageData,x+1, y) + getRed(imageData,x-1, y-1) + getRed(imageData,x, y-1) +getRed(imageData,x+1, y-1);
+                g = getGreen(imageData,x-1,y+1) + getGreen(imageData,x - 1, y + 1) + getGreen(imageData,x, y + 1) +  getGreen(imageData,x + 1, y + 1) + getGreen(imageData,x - 1, y)+getGreen(imageData,x, y)+ getGreen(imageData,x+1, y) + getGreen(imageData,x-1, y-1) + getGreen(imageData,x, y-1) +getGreen(imageData,x+1, y-1);
+                b = getBlue(imageData,x-1,y+1) + getBlue(imageData,x - 1, y + 1) + getBlue(imageData,x, y + 1) +  getBlue(imageData,x + 1, y + 1) + getBlue(imageData,x - 1, y)+getBlue(imageData,x, y)+ getBlue(imageData,x+1, y) + getBlue(imageData,x-1, y-1) + getBlue(imageData,x, y-1) +getBlue(imageData,x+1, y-1);
+                setPixel(imageData,x, y,r/9,g/9,b/9,255);
+            }
+        }
+    }
+    ctx.putImageData(imageData,0,0);
 }
 
 //funcion para pintar los pixeles
