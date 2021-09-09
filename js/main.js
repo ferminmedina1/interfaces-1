@@ -59,10 +59,14 @@ function loadPage () {
 
 //evento del slider de brillo
 
-   /* document.querySelector("#brightness").addEventListener("click", function(e) {
-       //hacer
-    });*/
+   document.querySelector("#restBrightness").addEventListener("click", function(e) {
+       filterBrillo(-3);
+    });
 
+    document.querySelector("#plusBrightness").addEventListener("click", function(e) {
+        filterBrillo(3);
+     });
+ 
 
 //evento para limpiar el canvas
 
@@ -159,10 +163,6 @@ function habilitarFiltros(){
                 filterNegativo();   
             }
 
-            if (botones[i].value == "brillo"){
-                filterBrillo();
-            } 
-
             if (botones[i].value == "saturacion"){
                 filterSaturacion();
             }
@@ -238,10 +238,10 @@ function filterSaturacion(){
 
 //funcion para filtro de brillo
 
-function filterBrillo(){
+function filterBrillo(brillo){
 
     let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
+    console.log(brillo);
     for (let x = 0; x < canvas.width; x++) {
         for (let y = 0; y < canvas.height; y++) {
             
@@ -250,7 +250,7 @@ function filterBrillo(){
             let b = getBlue(imageData, x, y);
             let a = 255;
             let hsv = rgbToHsv (r, g, b);
-            hsv.v += 3;
+            hsv.v += brillo;
             let jsonRGB = HSVtoRGB(hsv)
             r = jsonRGB.r
             g = jsonRGB.g

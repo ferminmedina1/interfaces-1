@@ -50,6 +50,15 @@ header{
     align-items: center;
     justify-content: center;
 }
+
+.panel{
+    display: flex;
+    margin: 20px;
+    padding: 10px;
+    background-color: #131313;
+    border-radius: 30px;
+}
+
 .paint-container{
     width: auto;
     margin-top: 1.5%;
@@ -61,10 +70,9 @@ header{
 }
 
 .colorYFiltros{
-
     display: flex;
     flex-direction: column;
-    margin: 0% 3% 3% 0;
+    margin-left: 20px;
     align-items: center;
 }
 
@@ -90,12 +98,12 @@ h4{
 }
 
 button{
-
-    margin-top: 18px;
+    margin-top: 20px;
     display: flex;
     align-items: center;
-    background-color: white;
-    width: 97%;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    width: 80%;
     justify-content: center;
     padding-top: 6px;
     font-family: 'Oswald', sans-serif;
@@ -103,6 +111,7 @@ button{
     padding-bottom: 6px;
     font-size: 107%;
     border-radius: 20px;
+    border: none;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     
 }    

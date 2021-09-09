@@ -28,38 +28,40 @@
         <section class="paint-container">
 
             <canvas id='canvas' width="800" height="500"></canvas>
-
-            <ul class="buttons">
-                
-                <li class="item" id="pencil">
-                        <i class='fas fa-pencil-alt'></i>
-                    <div class="on-slider" id="sliderPencil">
-                        <input type="range" min="1" max="100" value="50" id="pencilThickness">
+            
+            <section class="panel">
+                <ul class="buttons">
+                    
+                    <li class="item" id="pencil">
+                            <i class='fas fa-pencil-alt'></i>
+                        <div class="on-slider" id="sliderPencil">
+                            <input type="range" min="1" max="100" value="50" id="pencilThickness">
+                        </div>
+                    </li>
+                    <li class="item" id="eraser">
+                        <i class='fas fa-eraser'></i>
+                        <div class="on-slider" id="sliderEraser">
+                            <input type="range" min="1" max="100" value="50" id="eraserThickness">
+                        </div>
+                    </li>
+                    
+                    <li class="item" id="select-image"><i class="fas fa-file-image"></i>
+                        <input type="file" name="image" id="myFile" ></li>
+                    
+                    <li class="item" id='brightness'>
+                        <i class="far fa-sun"></i>
+                        <div class="brightness-buttons">
+                            <button class="brightness-button" id="restBrightness">-</button>
+                            <button class="brightness-button" id="plusBrightness">+</button>
+                        </div>      
+                    </li>             
+                    
+                    <div class="file-container">
+                    <li class="item" id="reset"><i class="far fa-file"></i></li>
+                    <li class="item" id="download"><i class="fa fa-download"></i></li>
                     </div>
-                </li>
-                <li class="item" id="eraser">
-                    <i class='fas fa-eraser'></i>
-                    <div class="on-slider" id="sliderEraser">
-                        <input type="range" min="1" max="100" value="50" id="eraserThickness">
-                    </div>
-                </li>
-                
-                <li class="item" id="select-image"><i class="fas fa-file-image"></i>
-                    <input type="file" name="image" id="myFile" ></li>
-                
-                    <!-- <li class="item" id='brightness'>
-                    <i class="far fa-sun"></i>
-                    <div class="on-slider" id="slider">
-                        <input type="range" min="1" max="100" value="50" id="myRange">
-                    </div>      
-                </li>             -->
-                
-                <div class="file-container">
-                <li class="item" id="reset"><i class="far fa-file"></i></li>
-                <li class="item" id="download"><i class="fa fa-download"></i></li>
-                </div>
-                
-            </ul>
+                    
+                </ul>
                 <div class="colorYFiltros">
                     <section class="color-picker">
                         <input type="color" id="color-picker" name="head" value="#000000">
@@ -68,7 +70,6 @@
                         <h4>FILTROS</h4>
         
                             <div class="buttonsFilters">
-                                <button value="brillo">Brillo</button>
                                 <button value="binarizacion">Binarización</button>
                                 <button value="sepia">Sepia</button>
                                 <button value="saturacion">Saturación</button>
@@ -76,22 +77,8 @@
                                 <button value="negativo">Negativo</button>
                             </div>
                     </div>
-                <!-- <li class="item">
-                    <select name="filter-select" id="filter-select">
-                        <option hidden></option>
-                        <option value="binarizacion">Binarización</option>
-                        <option value="sepia">Sepia</option>
-                        <option value="saturacion">Saturación</option>
-                        <option value="blur">Blur</option>
-                        <option value="negativo">Negativo</option>
-                    </select>
-                </li>
-         -->
-
-            
-            <!-- <section class="color-picker">
-                <input type="color" id="color-picker" name="head" value="#000000">
-            </section> -->
+                </div>
+            </section>
         </section>
     </article>
 
