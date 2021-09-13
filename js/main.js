@@ -133,22 +133,16 @@ function loadPage () {
 
 
     let imgInput = document.getElementById('myFile');
+
     imgInput.addEventListener('change', function(e) {
         if(e.target.files) {
             let imageFile = e.target.files[0]; //aca obtenemos el archivo
             let reader = new FileReader();
             reader.readAsDataURL(imageFile);
             reader.onloadend = function (e) {
-                let myImage = new Image(); // Crea la imageb
+                let myImage = new Image(); // Crea la imagen
                 myImage.src = e.target.result; 
                 myImage.onload = function() {
-                    // if(myImage.width > canvas.width){
-                    //     myImage.width = canvas.width
-                    // }
-                    
-                    // if(myImage.height > canvas.height){
-                    //     myImage.height = canvas.height
-                    // }
                     canvas.width = myImage.width; // Assigns image's width to canvas
                     canvas.height = myImage.height; // Assigns image's height to canvas
                     ctx.drawImage(myImage, 0, 0);
@@ -156,10 +150,8 @@ function loadPage () {
                 }
             }
         }
+        imgInput.value = '';
     });
-    
-
-
 
 
 //evento para seleccionar el filtro
@@ -199,13 +191,19 @@ function loadPage () {
     }
 
 
-    function filterBlur(imagen) {
-        let matrizFiltro = [
-            [1, 1, 1],
-            [1, 1, 1],
-            [1, 1, 1]
-        ];
-        return apFiltro(imagen);
+    function filterBlur(imageData) {
+        for (let y = 0; y < canvas.height; y++) {
+            for (let x = 0; x < canvas.width; x++) {
+                let r=0, g=0, b=0;
+                if  ((x + 1 < canvas.width) && (x - 1 >= 0) && (y + 1 < canvas.height) && (y - 1 >= 0)) {           
+                    r = getRed(imageData,x-1,y+1) + getRed(imageData,x - 1, y + 1) + getRed(imageData,x, y + 1) +  getRed(imageData,x + 1, y + 1) + getRed(imageData,x - 1, y)+getRed(imageData,x, y)+ getRed(imageData,x+1, y) + getRed(imageData,x-1, y-1) + getRed(imageData,x, y-1) +getRed(imageData,x+1, y-1);
+                    g = getGreen(imageData,x-1,y+1) + getGreen(imageData,x - 1, y + 1) + getGreen(imageData,x, y + 1) +  getGreen(imageData,x + 1, y + 1) + getGreen(imageData,x - 1, y)+getGreen(imageData,x, y)+ getGreen(imageData,x+1, y) + getGreen(imageData,x-1, y-1) + getGreen(imageData,x, y-1) +getGreen(imageData,x+1, y-1);
+                    b = getBlue(imageData,x-1,y+1) + getBlue(imageData,x - 1, y + 1) + getBlue(imageData,x, y + 1) +  getBlue(imageData,x + 1, y + 1) + getBlue(imageData,x - 1, y)+getBlue(imageData,x, y)+ getBlue(imageData,x+1, y) + getBlue(imageData,x-1, y-1) + getBlue(imageData,x, y-1) +getBlue(imageData,x+1, y-1);
+                    setPixel(imageData,x, y,r/9,g/9,b/9,255);
+                }
+            }
+        }
+        ctx.putImageData(imageData,0,0);
     }
 
 //funcion para el filtro negativo
@@ -399,22 +397,6 @@ function loadPage () {
         }
 
     return { r: Math.round(rgb.r), g: Math.round(rgb.g), b: Math.round(rgb.b) };
-    }
-
-    function apFiltro(imageData) {
-
-    for (let y = 0; y < canvas.height; y++) {
-        for (let x = 0; x < canvas.width; x++) {
-            let r=0, g=0, b=0;
-            if  ((x + 1 < canvas.width) && (x - 1 >= 0) && (y + 1 < canvas.height) && (y - 1 >= 0)) {           
-                r = getRed(imageData,x-1,y+1) + getRed(imageData,x - 1, y + 1) + getRed(imageData,x, y + 1) +  getRed(imageData,x + 1, y + 1) + getRed(imageData,x - 1, y)+getRed(imageData,x, y)+ getRed(imageData,x+1, y) + getRed(imageData,x-1, y-1) + getRed(imageData,x, y-1) +getRed(imageData,x+1, y-1);
-                g = getGreen(imageData,x-1,y+1) + getGreen(imageData,x - 1, y + 1) + getGreen(imageData,x, y + 1) +  getGreen(imageData,x + 1, y + 1) + getGreen(imageData,x - 1, y)+getGreen(imageData,x, y)+ getGreen(imageData,x+1, y) + getGreen(imageData,x-1, y-1) + getGreen(imageData,x, y-1) +getGreen(imageData,x+1, y-1);
-                b = getBlue(imageData,x-1,y+1) + getBlue(imageData,x - 1, y + 1) + getBlue(imageData,x, y + 1) +  getBlue(imageData,x + 1, y + 1) + getBlue(imageData,x - 1, y)+getBlue(imageData,x, y)+ getBlue(imageData,x+1, y) + getBlue(imageData,x-1, y-1) + getBlue(imageData,x, y-1) +getBlue(imageData,x+1, y-1);
-                setPixel(imageData,x, y,r/9,g/9,b/9,255);
-            }
-        }
-    }
-    ctx.putImageData(imageData,0,0);
     }
 
 //funcion para pintar los pixeles
