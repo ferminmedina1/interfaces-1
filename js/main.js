@@ -29,6 +29,13 @@ function loadPage () {
     });
 
 
+//si se va del canvas deja de dibujar
+
+    canvas.addEventListener("mouseleave", function(e){ 
+        dibujando = false;
+    });
+
+
 //funcion que acciona al lapiz
 
     function accionarLapiz(){
